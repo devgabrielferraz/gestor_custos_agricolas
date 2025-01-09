@@ -16,6 +16,12 @@ const Insumos = () => {
     return (quantidade * valorUnitario).toFixed(2);
   };
 
+  const calcularValorTotalInsumos = () => {
+    return planilha
+      .reduce((total, item) => total + parseFloat(item.valorTotal || 0), 0)
+      .toFixed(2);
+  };
+
   // Carregar insumos do banco de dados ao montar o componente
   useEffect(() => {
     const fetchInsumos = async () => {
@@ -26,8 +32,6 @@ const Insumos = () => {
           },
         });
 
-        console.log("Dados recebidos:", response.data);
-  
         if (response.status === 200) {
           const data = response.data;
   
@@ -93,10 +97,11 @@ const Insumos = () => {
     }
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("pt-BR");
+    const formatDate = (dateString) => {
+    const date = new Date(dateString + 'T00:00:00'); // Força a data para evitar ajustes de fuso
+    return date.toLocaleDateString("pt-BR", { timeZone: "UTC" });
   };
+  
 
   const handleDelete = async (id) => {
     if (window.confirm("Tem certeza que deseja excluir este insumo?")) {
@@ -201,6 +206,12 @@ const Insumos = () => {
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          <tr>
+            <td colSpan="1" style={{ textAlign: "left", fontWeight: "bold" }}>Valor Total:</td>
+            <td colSpan="4" style={{ textAlign: "left", fontWeight: "bold" }}>R$ {calcularValorTotalInsumos()}</td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );
