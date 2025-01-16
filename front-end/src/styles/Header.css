@@ -1,0 +1,37 @@
+/* Header fixo */
+.header-dashboard {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px; /* Altura do header */
+    padding: 0 20px;
+    background-color: #333; /* Cor de fundo do cabeçalho */
+    color: white;
+    top: 0; /* Fixa o header no topo */
+    left: 0; /* Alinha o header ao lado esquerdo da tela */
+    width: 100%; /* Faz o header ocupar toda a largura da tela */
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
+}
+
+/* Botão de logout */
+.logout-btn {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 60px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #e60000;
+}
+
+.page-content {
+    margin-top: 150px; /* Espaço para compensar o header */
+}
+

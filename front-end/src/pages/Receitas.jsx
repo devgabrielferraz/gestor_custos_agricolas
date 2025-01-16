@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from "../components/Header"; 
 import "../styles/Receitas.css";
 import { Bar } from "react-chartjs-2";
 import {
@@ -19,22 +20,63 @@ const Receitas = () => {
   const [receitas, setReceitas] = useState([]);
   const [descricao, setDescricao] = useState("");
   const [valorEntrada, setValorEntrada] = useState("");
+  const [graficoDados, setGraficoDados] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Função para buscar receitas do usuário
   const fetchReceitas = async () => {
     try {
-      const usuarioId = 1; // ID do usuário temporário
-      const response = await axios.get(`http://localhost:5000/receitas/list/${usuarioId}`);
-      setReceitas(response.data.receitas);
+      const usuarioId = localStorage.getItem("userId");
+      if (!usuarioId) {
+        console.error("ID do usuário não encontrado. Certifique-se de que o usuário está logado.");
+        return;
+      }
+
+      const response = await axios.get(`http://localhost:5000/receitas/${usuarioId}`);
+      setReceitas(response.data);
     } catch (error) {
       console.error("Erro ao buscar receitas:", error);
     }
   };
 
+  // Função para buscar dados do gráfico
+const fetchGraficoDados = async () => {
+  try {
+    const usuarioId = localStorage.getItem("userId");
+    if (!usuarioId) {
+      console.error("ID do usuário não encontrado. Certifique-se de que o usuário está logado.");
+      return;
+    }
+
+    //console.log("ID do usuário sendo enviado:", usuarioId); // Debug
+
+    const response = await axios.get("http://localhost:5000/receitas/dados-receita", {
+      headers: { "X-Usuario-ID": usuarioId }, // Cabeçalho correto
+    });
+
+    //console.log("Resposta recebida do backend:", response.data); // Debug
+    setGraficoDados({
+      receitaBruta: Number(response.data.receita_bruta) || 0,
+      totalInsumos: Number(response.data.total_insumos) || 0,
+      totalServicos: Number(response.data.total_servicos) || 0,
+      receitaLiquida: Number(response.data.receita_liquida) || 0,
+    });
+  } catch (error) {
+    console.error("Erro ao buscar dados do gráfico:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
   // Função para adicionar uma nova receita
   const addReceita = async () => {
     try {
-      const usuarioId = 1; // ID do usuário temporário
+      const usuarioId = localStorage.getItem("userId");
+      if (!usuarioId) {
+        console.error("ID do usuário não encontrado. Certifique-se de que o usuário está logado.");
+        return;
+      }
+
       const response = await axios.post("http://localhost:5000/receitas/add", {
         usuario_id: usuarioId,
         descricao,
@@ -44,6 +86,7 @@ const Receitas = () => {
       setDescricao("");
       setValorEntrada("");
       fetchReceitas();
+      fetchGraficoDados();
     } catch (error) {
       console.error("Erro ao adicionar receita:", error);
     }
@@ -52,9 +95,10 @@ const Receitas = () => {
   // Função para excluir uma receita
   const deleteReceita = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/receitas/delete/${id}`);
+      const response = await axios.delete(`http://localhost:5000/receitas/${id}`);
       alert(response.data.message);
       fetchReceitas();
+      fetchGraficoDados();
     } catch (error) {
       console.error("Erro ao excluir receita:", error);
     }
@@ -62,37 +106,50 @@ const Receitas = () => {
 
   useEffect(() => {
     fetchReceitas();
+    fetchGraficoDados();
   }, []);
 
-  // Dados para o gráfico de receita bruta
-  const receitaBrutaData = {
-    labels: receitas.map((receita) => receita.descricao),
-    datasets: [
-      {
-        label: "Receita Bruta (R$)",
-        data: receitas.map((receita) => receita.valor_entrada),
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
 
-  // Dados para o gráfico de receita líquida (exemplo básico)
+  if (!graficoDados) {
+    return <p>Erro ao carregar os dados do gráfico. Tente novamente mais tarde.</p>;
+  }
+
+  // Dados para o gráfico de receita líquida
   const receitaLiquidaData = {
-    labels: receitas.map((receita) => receita.descricao),
+    labels: ["Receita Bruta", "Total Insumos", "Total Serviços", "Receita Líquida"],
     datasets: [
       {
-        label: "Receita Líquida (R$)",
-        data: receitas.map((receita) => receita.valor_entrada - 100), // Substituir "100" pelos gastos reais
-        backgroundColor: "rgba(255, 99, 132, 0.6)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        label: "Valores (R$)",
+        data: [
+          graficoDados.receitaBruta,
+          graficoDados.totalInsumos,
+          graficoDados.totalServicos,
+          graficoDados.receitaLiquida,
+        ],
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.6)",
+          "rgba(255, 159, 64, 0.6)",
+          "rgba(153, 102, 255, 0.6)",
+          "rgba(255, 99, 132, 0.6)",
+        ],
+        borderColor: [
+          "rgba(75, 192, 192, 1)",
+          "rgba(255, 159, 64, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 99, 132, 1)",
+        ],
         borderWidth: 1,
       },
     ],
   };
 
   return (
+    <div className="page-content">
+      <Header /> {/* Reutilizando o Header */}
+    
     <div className="receitas-container">
       <h1>Gestão de Receitas</h1>
 
@@ -124,23 +181,20 @@ const Receitas = () => {
           {receitas.map((receita) => (
             <tr key={receita.id}>
               <td>{receita.descricao}</td>
-              <td>{receita.valor_entrada.toFixed(2)}</td>
+              <td>{Number(receita.valor_entrada).toFixed(2)}</td>
               <td>
-                <button onClick={() => deleteReceita(receita.id)}>
-                  Excluir
-                </button>
+                <button className= "excluir" onClick={() => deleteReceita(receita.id)}>Excluir</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="charts-container">
-        <h2>Gráfico de Receita Bruta</h2>
-        <Bar data={receitaBrutaData} />
 
-        <h2>Gráfico de Receita Líquida</h2>
+      <div className="charts-container">
+        <h2>Gráfico de Receita</h2>
         <Bar data={receitaLiquidaData} />
       </div>
+    </div>
     </div>
   );
 };

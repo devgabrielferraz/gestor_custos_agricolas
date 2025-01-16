@@ -1,3 +1,27 @@
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto; /* Altura completa da viewport */
+  box-sizing: border-box;
+  background-color: #f9f9f9; /* Define a cor de fundo padrão */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh; /* Altura mínima igual à viewport */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto; /* Permite o scroll vertical */
+  background-color: #f9f9f9; /* Fundo da página */
+}
+
 /* Container principal */
 .insumos-container {
     max-width: 800px;
@@ -79,6 +103,7 @@
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    
   }
   
   .planilha th, .planilha td {
@@ -88,16 +113,128 @@
   }
   
   .planilha th {
-    background-color: #007bff;
-    color: #fff;
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+    color: #333;
     font-weight: bold;
   }
   
   .planilha tr:hover {
     background-color: #f1f1f1;
+    
   }
   
   .planilha td {
     color: #555;
+    border: 1px solid #ddd;
   }
   
+  .excluir {
+    background-color: red; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Remove a borda padrão */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  }
+  
+  .excluir:hover {
+    background-color: darkred; /* Cor de fundo ao passar o mouse */
+  }
+
+  /* Responsividade */
+
+/* Para telas menores que 1024px (tablets e laptops pequenos) */
+@media (max-width: 1024px) {
+  .insumos-container {
+    padding: 15px; /* Reduz o padding para caber melhor */
+  }
+
+  h1 {
+    font-size: 1.8rem; /* Diminui o tamanho do título */
+  }
+
+  h2 {
+    font-size: 1.2rem; /* Ajusta o tamanho dos subtítulos */
+  }
+
+  .btn-adicionar {
+    font-size: 14px; /* Diminui o texto do botão */
+  }
+
+  .planilha th, .planilha td {
+    padding: 8px; /* Reduz o padding das células */
+  }
+}
+
+/* Para telas menores que 768px (dispositivos móveis) */
+@media (max-width: 768px) {
+  .insumos-container {
+    padding: 10px; /* Reduz ainda mais o padding */
+  }
+
+  h1 {
+    font-size: 1.5rem; /* Diminui o tamanho do título */
+  }
+
+  h2 {
+    font-size: 1rem; /* Ajusta o tamanho dos subtítulos */
+  }
+
+  .btn-adicionar {
+    font-size: 12px; /* Ajusta o texto do botão */
+    padding: 8px; /* Ajusta o padding do botão */
+  }
+
+  .planilha th, .planilha td {
+    padding: 5px; /* Reduz o padding das células */
+  }
+}
+
+/* Para telas menores que 480px (smartphones pequenos) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem; /* Reduz o tamanho do título */
+  }
+
+  h2 {
+    font-size: 0.9rem; /* Ajusta o tamanho dos subtítulos */
+  }
+
+  .btn-adicionar {
+    font-size: 10px; /* Ajusta o texto do botão */
+    padding: 6px; /* Ajusta o padding do botão */
+  }
+
+  .planilha {
+    font-size: 0.9rem; /* Diminui o tamanho do texto na tabela */
+  }
+}
+
+
+/* Responsividade adicional */
+@media (max-width: 480px) {
+  .insumos-container {
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  .btn-adicionar {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .planilha {
+    font-size: 0.8rem; /* Reduz o tamanho do texto na tabela */
+  }
+
+  .planilha th, .planilha td {
+    padding: 5px;
+  }
+}
+

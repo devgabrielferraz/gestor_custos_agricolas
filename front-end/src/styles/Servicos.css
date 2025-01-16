@@ -1,0 +1,206 @@
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto; /* Altura completa da viewport */
+    box-sizing: border-box;
+    background-color: #f9f9f9; /* Define a cor de fundo padrão */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh; /* Altura mínima igual à viewport */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: auto; /* Permite o scroll vertical */
+    background-color: #f9f9f9; /* Fundo da página */
+}
+
+
+.servicos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-bottom: 20px;
+  }
+  
+  .form-servicos {
+    display: grid;
+    gap: 15px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  input:focus {
+    border-color: #4CAF50;
+  }
+  
+  .btn-adicionar {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+  }
+  
+  .btn-adicionar:hover {
+    background: #45a049;
+  }
+  
+  .servicos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .servicos-table th, .servicos-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .servicos-table th {
+    border: 1px solid #ddd;
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .servicos-table tr:nth-child(even) {
+    background: #f2f2f2;
+  }
+  
+  .servicos-table tr:hover {
+    background: #ddd;
+  }
+  
+  .servicos-table button {
+    padding: 5px 10px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .servicos-table button:hover {
+    background: #e53935;
+  }
+
+  /* Responsividade */
+@media (max-width: 1024px) {
+  .servicos-container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .form-servicos {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn-adicionar {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .servicos-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-servicos {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  .btn-adicionar {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .servicos-table th, .servicos-table td {
+    padding: 6px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .servicos-container {
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .form-servicos {
+    gap: 5px;
+    padding: 8px;
+  }
+
+  input {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .btn-adicionar {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .servicos-table th, .servicos-table td {
+    padding: 4px;
+    font-size: 12px;
+  }
+}

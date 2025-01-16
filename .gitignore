@@ -1,0 +1,56 @@
+#ARQUIVOS FRONT-END
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignorar diretório `node_modules`
+front-end/node_modules/
+
+# Ignorar builds do Vite
+front-end/dist/
+
+
+# Ignorar configurações específicas do sistema operacional
+front-end/.DS_Store
+
+# Ignorar anotaçoes
+comandos.txt
+modelo_tabelas_db.txt
+todo.txt
+
+
+#ARQUIVOS BACK-END
+
+# Ignorar arquivos compilados de Python
+back-end/__pycache__/
+back-end/*.pyc
+
+# Ignorar ambiente virtual
+back-end/venv/
+back-end/.env
+
+# Ignorar logs e caches
+back-end/*.log
+back-end/.cache/

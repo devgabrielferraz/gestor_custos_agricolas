@@ -1,9 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard"; // Comentei porque ainda não existe
+import Dashboard from "./pages/Dashboard";
 import Insumos from "./pages/Insumos";
-import ProtectedRoute from "./components/ProtectedRoute"; // Mantenha comentado se ainda não implementado
+import Servicos from "./pages/Servicos";
+import Receitas from "./pages/Receitas";
+import ProtectedRoute from "./components/ProtectedRoute"; 
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/insumos" element={<ProtectedRoute><Insumos /></ProtectedRoute>} />
+        <Route path="/servicos" element={<ProtectedRoute><Servicos /></ProtectedRoute>} />
+        <Route path="/receitas" element={<ProtectedRoute><Receitas /></ProtectedRoute>} />
       </Routes>
     </Router>
   );

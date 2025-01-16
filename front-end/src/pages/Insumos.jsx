@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Header from "../components/Header"; 
 import "../styles/Insumos.css";
 
 const Insumos = () => {
@@ -21,6 +22,7 @@ const Insumos = () => {
       .reduce((total, item) => total + parseFloat(item.valorTotal || 0), 0)
       .toFixed(2);
   };
+
 
   // Carregar insumos do banco de dados ao montar o componente
   useEffect(() => {
@@ -129,6 +131,8 @@ const Insumos = () => {
   };
 
   return (
+    <div className="page-content">
+      <Header /> {/* Reutilizando o Header */}
     <div className="insumos-container">
       <h1>Cadastro de Insumos</h1>
 
@@ -201,7 +205,7 @@ const Insumos = () => {
               <td>{formatDate(item.dataCompra)}</td>
               <td>{formatDate(item.dataPagamento)}</td>
               <td>
-                <button onClick={() => handleDelete(item.id)}>Excluir</button>
+                <button className= "excluir" onClick={() => handleDelete(item.id)}>Excluir</button>
               </td>
             </tr>
           ))}
@@ -213,6 +217,7 @@ const Insumos = () => {
           </tr>
         </tfoot>
       </table>
+    </div>
     </div>
   );
 };

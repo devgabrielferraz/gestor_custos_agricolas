@@ -1,20 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*
+html, body {
+    border: 2px solid red; /* Apenas para teste */
+
+
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto; /* Altura completa da viewport */
+    box-sizing: border-box;
+    background-color: #f9f9f9; /* Define a cor de fundo padrão */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh; /* Altura mínima igual à viewport */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: auto; /* Permite o scroll vertical */
+    background-color: #f9f9f9; /* Fundo da página */
+}
+
 .receitas-container {
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     padding: 20px;
+    width: 100%;
     max-width: 800px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
+    gap: 20px;
+    background-color: #ffffff; /* Fundo branco do container */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
+    margin: 20px 0;
+}
+
+
   h1 {
     text-align: center;
     color: #333;
   }
   
   .form-container {
+    width: 100%;
+    max-width: 600px;
     display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
   }
@@ -41,10 +84,23 @@
     background-color: #45a049;
   }
   
+  .excluir {
+    background-color: red; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    border: none; /* Remove a borda padrão */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+  }
+  
+  .excluir:hover {
+    background-color: darkred; /* Cor de fundo ao passar o mouse */
+  }
   .receitas-table {
     width: 100%;
+    max-width: 800px;
     border-collapse: collapse;
     margin-top: 20px;
+    color: black;
+    
   }
   
   .receitas-table th, .receitas-table td {
@@ -59,5 +115,99 @@
   }
   
   .charts-container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
+    gap: 20px;
   }
+
+  /* Responsividade */
+@media (max-width: 1024px) {
+  .receitas-container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .form-container {
+    max-width: 500px;
+  }
+
+  .charts-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .receitas-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-container {
+    max-width: 100%;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .receitas-table th, .receitas-table td {
+    padding: 6px;
+  }
+
+  .charts-container {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .receitas-container {
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .form-container {
+    gap: 8px;
+  }
+
+  input {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .receitas-table {
+    font-size: 12px; /* Reduz o tamanho geral da tabela */
+  }
+
+  .receitas-table th, .receitas-table td {
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  .charts-container {
+    gap: 5px;
+  }
+}

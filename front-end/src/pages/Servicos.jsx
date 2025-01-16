@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from "../components/Header"; 
 import "../styles/Servicos.css";
 
 const Servicos = () => {
@@ -72,6 +73,8 @@ const Servicos = () => {
   };
 
   return (
+    <div className="page-content">
+    <Header /> {/* Reutilizando o Header */}
     <div className="servicos-container">
       <h1>Serviços</h1>
       <div className="form-servicos">
@@ -140,6 +143,7 @@ const Servicos = () => {
           </tr>
         </tfoot>
       </table>
+    </div>
     </div>
   );
 };
