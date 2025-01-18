@@ -40,6 +40,9 @@ comandos.txt
 modelo_tabelas_db.txt
 todo.txt
 
+# Ignorar ambiente virtual
+front-end/.env
+
 
 #ARQUIVOS BACK-END
 

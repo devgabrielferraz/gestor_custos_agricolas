@@ -10,7 +10,7 @@ const Login = () => {
   const [forgotPassword, setForgotPassword] = useState(false);
   const [message, setMessage] = useState(""); // Para mensagens de erro/sucesso
 
-  const API_URL = "http://localhost:5000/auth"; // URL do back-end
+  const API_URL = `${process.env.REACT_APP_API_URL}/auth`; // URL do back-end
 
   const navigate = useNavigate(); // Hook de navegação
 

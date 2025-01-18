@@ -14,7 +14,7 @@ const Servicos = () => {
   // Função para buscar os serviços
   const fetchServicos = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/servicos`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/servicos`, {
         params: {
           usuario_id: localStorage.getItem('userId'),
         },
@@ -32,7 +32,7 @@ const Servicos = () => {
   // Função para adicionar um serviço
   const handleAddServico = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/servicos/add`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/servicos/add`, {
         usuario_id: localStorage.getItem("userId"),
         descricao,
         valor_total: valorTotal,
@@ -60,7 +60,7 @@ const Servicos = () => {
   // Função para excluir um serviço
   const handleDeleteServico = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/servicos/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/servicos/${id}`);
       setServicos(servicos.filter((servico) => servico.id !== id));
     } catch (error) {
       console.error('Erro ao excluir serviço:', error);
