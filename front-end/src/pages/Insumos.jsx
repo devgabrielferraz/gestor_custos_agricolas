@@ -28,7 +28,7 @@ const Insumos = () => {
   useEffect(() => {
     const fetchInsumos = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/insumos`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/insumos`, {
           params: {
             usuario_id: localStorage.getItem("userId"),
           },
@@ -79,7 +79,7 @@ const Insumos = () => {
     };
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/insumos/add`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/insumos/add`, {
         usuario_id: localStorage.getItem("userId"),
         insumo: novoInsumo.insumo,
         quantidade_total: novoInsumo.quantidadeTotal,
@@ -108,7 +108,7 @@ const Insumos = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Tem certeza que deseja excluir este insumo?")) {
       try {
-        const response = await axios.delete(`${process.env.REACT_APP_API_URL}/insumos/${id}`);
+        const response = await axios.delete(`${import.meta.env.VITE_API_URL}/insumos/${id}`);
         if (response.status === 200) {
           setPlanilha((prev) => prev.filter((insumo) => insumo.id !== id));
           alert("Insumo excluído com sucesso!");

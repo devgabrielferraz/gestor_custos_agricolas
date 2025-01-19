@@ -10,13 +10,14 @@ const Login = () => {
   const [forgotPassword, setForgotPassword] = useState(false);
   const [message, setMessage] = useState(""); // Para mensagens de erro/sucesso
 
-  const API_URL = `${process.env.REACT_APP_API_URL}/auth`; // URL do back-end
+  const API_URL = `${import.meta.env.VITE_API_URL}/auth`; // URL do back-end
 
   const navigate = useNavigate(); // Hook de navegação
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setMessage(""); // Limpar mensagens anteriores
+
     try {
       const response = await fetch(`${API_URL}/login`, {
         method: "POST",

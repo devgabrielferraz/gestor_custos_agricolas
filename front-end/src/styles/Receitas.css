@@ -94,6 +94,7 @@ body {
   .excluir:hover {
     background-color: darkred; /* Cor de fundo ao passar o mouse */
   }
+  
   .receitas-table {
     width: 100%;
     max-width: 800px;

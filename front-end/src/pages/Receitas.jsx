@@ -32,7 +32,7 @@ const Receitas = () => {
         return;
       }
 
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/receitas/${usuarioId}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/receitas/${usuarioId}`);
       setReceitas(response.data);
     } catch (error) {
       console.error("Erro ao buscar receitas:", error);
@@ -50,7 +50,7 @@ const fetchGraficoDados = async () => {
 
     //console.log("ID do usuário sendo enviado:", usuarioId); // Debug
 
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/receitas/dados-receita`, {
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/receitas/dados-receita`, {
       headers: { "X-Usuario-ID": usuarioId }, // Cabeçalho correto
     });
 
@@ -77,7 +77,7 @@ const fetchGraficoDados = async () => {
         return;
       }
 
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/receitas/add`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/receitas/add`, {
         usuario_id: usuarioId,
         descricao,
         valor_entrada: parseFloat(valorEntrada),
@@ -95,7 +95,7 @@ const fetchGraficoDados = async () => {
   // Função para excluir uma receita
   const deleteReceita = async (id) => {
     try {
-      const response = await axios.delete(`${process.env.REACT_APP_API_URL}/receitas/${id}`);
+      const response = await axios.delete(`${import.meta.env.VITE_API_URL}/receitas/${id}`);
       alert(response.data.message);
       fetchReceitas();
       fetchGraficoDados();
