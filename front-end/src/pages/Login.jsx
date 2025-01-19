@@ -27,7 +27,8 @@ const Login = () => {
       const data = await response.json();
       if (response.ok) {
         setMessage("Login realizado com sucesso!");
-        localStorage.setItem("userId", data.user_id); 
+        localStorage.setItem("authToken", data.token);  // Armazenar o token de autenticação
+        localStorage.setItem("userId", data.user_id);  //Renderizar o nome do usuario
         navigate("/dashboard");
         // Redirecionar ou salvar o token/session aqui
       } else {
