@@ -9,8 +9,8 @@ import os
 
 app = Flask(__name__)
 #Habilitar o CORS para o back-end
-#CORS(app) - deixa acesseivel publicamente
-CORS(app, origins=["https://gestor-custos-agricolas.vercel.app/"])
+CORS(app) 
+#CORS(app, origins=["https://gestor-custos-agricolas.vercel.app/"])
 
 #Carregar as  variáveis do .env
 load_dotenv()
